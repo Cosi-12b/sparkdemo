@@ -12,6 +12,6 @@ public class StudentInfo {
   }
   
   String fullName() {
-    return firstName + " " + lastName;
+    return firstName + " " + lastName + " (" + email + ")";
   }
 }

@@ -17,25 +17,32 @@ public class StudentChooserServer {
   }
 
   public void launch() {
-    get("/", (res, req) -> welcomePage());
-    post("/", (res, req) -> winnerPage(res, req));
+    get("/choose/", (res, req) -> welcomePage());
+    get("/", (res, req) -> winnerPage(res, req));
   }
 
   private String winnerPage(Request res, Response req) {
+    if (!studentDir.goodFile) {
+      return body().with(h1("Student file was not found...")).render();
+    }
     Random r = new Random();
     int studNum = r.nextInt(studentDir.count());
-    System.out.println(studNum);
     String name = studentDir.get(studNum);
-    return body().with(h1("You Are Chosen!"), h1(name)).render();
+    return body().with(h1("You are chosen!"), 
+                p("Based on a random selection, the COMPUTER has selected the following student "+
+                  "to be called on!"), h4(name),
+                form().withMethod("get").withAction("/").with(submitButton("Choose Me!!"))).render();
   }
 
   private String welcomePage() {
     return body().with(
         h1("Welcome!"),
-        h2("Are you ready to be called on?"),
-        p("This page is displayed using Java Spark. The idea is that whenver I want to call " +
-            "on someone at random, I will just click that big button below"),
-        form().withMethod("post").with(submitButton("Choose Me!!"))).render();
+        p("Welcome to the Student Chooser Application. It is used in the classroom to fairly choose students to " +
+        "call on. We don't want to always be calling thesa person, do we?"),
+        p("By the way, this is a demo program to show how easy it is to create a simple web application. " + 
+          "In this case we are using a simple server called Java Spark. This approach is good for a simple example, " +
+            "but it wouldn't really make sense for a more complicated application!"),
+        form().withMethod("get").withAction("/").with(submitButton("Choose Me!!"))).render();
   }
 
   public static Tag submitButton(String text) {

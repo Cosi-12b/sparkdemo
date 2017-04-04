@@ -12,12 +12,13 @@ import spark.Spark;
 
 public class StudentDirectory {
   ArrayList<StudentInfo> students = new ArrayList<>();
+  boolean goodFile;
 
-  public ArrayList<StudentInfo> readStudentInfoFile() {
+  public void readStudentInfoFile() {
+    goodFile = true;
     Reader in;
     Path currentRelativePath = Paths.get("");
     String s = currentRelativePath.toAbsolutePath().toString();
-  //  Spark.staticFileLocation("");
     System.out.println("Current relative path is: " + s);
     try {
       in = new FileReader("target/classes/main/resources/studentnames.csv");
@@ -26,13 +27,11 @@ public class StudentDirectory {
         students.add(new StudentInfo(r.get("First name"), r.get("Surname"), r.get("Email address")));
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      goodFile = false;
     }
-    return null;
   }
 
   public int count() {
-    System.out.println(students.size());
     return students.size();
   }
 
