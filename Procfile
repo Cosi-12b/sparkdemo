@@ -1,1 +1,1 @@
-web: java -jar target/SparkDemo-0.0.1-SNAPSHOT-with-dependencies.jar
+web: java -jar target/SparkDemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
