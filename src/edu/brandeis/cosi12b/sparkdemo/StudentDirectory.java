@@ -19,9 +19,9 @@ public class StudentDirectory {
     Reader in;
     Path currentRelativePath = Paths.get("");
     String s = currentRelativePath.toAbsolutePath().toString();
-    System.out.println("Current relative path is: " + s);
+    System.out.println("Current path is: " + s);
     try {
-      in = new FileReader("target/classes/main/resources/studentnames.csv");
+      in = new FileReader("target/classes/main/studentnames.csv");
       Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
       for (CSVRecord r : records) {
         students.add(new StudentInfo(r.get("First name"), r.get("Surname"), r.get("Email address")));
