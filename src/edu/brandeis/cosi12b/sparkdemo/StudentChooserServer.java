@@ -32,13 +32,13 @@ public class StudentChooserServer {
                 p("Based on a random selection, the COMPUTER has selected the following student "+
                   "to be called on!"), 
                 h4(name),
-                form().withMethod("get").withAction("/").with(submitButton("Choose Me!!"))).render();
+                form().withMethod("get").withAction("/chosen/").with(submitButton("Choose Me!!"))).render();
   }
 
   private String welcomePage() {
     return body().with(
         h1("Welcome!"),
-//        img().withSrc("https://www.brandeis.edu/communications/creative/downloads/4-inch-seal-pms-294.jpg"),
+        img().withSrc("https://www.brandeis.edu/communications/creative/downloads/4-inch-seal-pms-294.jpg"),
 
         p("Welcome to the Student Chooser Application. It is used in the classroom to fairly choose students to " +
         "call on. We don't want to always be calling thesa person, do we?"),
